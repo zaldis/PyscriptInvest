@@ -1,0 +1,75 @@
+input[type=text] {
+    border: 1px solid black;
+    width: 100%;
+    padding: 5px;
+}
+
+.title {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+
+.none {
+    display: none;
+}
+
+
+.btn {
+    background-color: gray;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.btn__success {
+    background-color: rgb(57, 129, 57);
+}
+
+.btn__label {
+    text-align: center;
+}
+
+.container {
+    margin-left: 20px;
+}
+
+.word-box {
+    margin-bottom: 20px;
+}
+
+.word-box__letter-box {
+    text-align: center;
+    margin-right: 10px;
+    border: 2px solid gray;
+    border-radius: 2px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.letter-box__empty {
+    border: 1px solid gray;
+    background-color: white;
+}
+
+.letter-box__correct {
+    border: 2px solid green;
+    background-color: #e0e7e0;
+    cursor: auto;
+}
+
+.letter-box__incorrect {
+    border: 2px solid red;
+    background-color: #f3266345;
+}
+
+.letter-box__position {
+    border-bottom: 2px solid grey;
+}
+
+.letter-box__letter {
+    padding: 10px 20px 10px 20px;
+    text-align: center;
+}

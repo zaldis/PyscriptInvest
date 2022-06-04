@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+          <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+          <link rel="stylesheet" href="{% static 'styles/hangman.css' %}" />
+          <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+    </head>
+
+    <body>
+        <h1 class="title">Hangman (<span id="spent-time">0m 0s</span>)</h1>
+
+        <div class="container">
+            <div>
+                <div style="display: flex">
+                    <img id="status-img" style="border: 2px solid grey;" src="{% static 'assets/step1.svg' %}" width="500px" height="500px">
+                    <div style="margin-left: 10px">
+                        <div class="word-box" style="display: flex">
+                            <!--
+                            The letter boxes are created by script with the following structure
+
+                            <div class="word-box__letter-box">
+                                <div class="letter-box__position">1</div>
+                                <div class="letter-box__letter">L</div>
+                            </div>
+                            -->
+                        </div>
+                        <div id="check-block" class="none">
+                            <div>Update letter by index <span id="selected-position">#</span></div>
+                            <input id="new-letter" type="text" maxlength="1">
+                            <div class="btn" style="margin-top: 10px;">
+                                <div id="next-btn" class="btn__label">Check Letter</div>
+                            </div>
+                        </div>
+                        <input id="load-word" type="hidden">
+                        <div class="btn btn__success" style="margin-top: 10px;">
+                            <div id="start-btn" class="btn__label">Start game</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const STATIC_BASE = "{% static '' %}";
+        </script>
+
+        <script src="{% static 'scripts/hangman.js' %}"></script>
+
+        <py-script src="{% static 'pyscripts/hangman.py' %}"></py-script>
+    </body>
+</html>
