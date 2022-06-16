@@ -1,5 +1,11 @@
 import json
-from js import console, document, window, STATIC_BASE, createWebSocket, alert
+from js import (
+    # base globalThis
+    console, document, window, alert,
+
+    # custom added
+    STATIC_BASE, createWebSocket
+)
 
 
 step = 1
@@ -16,11 +22,8 @@ spent_time_label = Element("spent-time")
 
 socket = None
 
-correct_letter_theme = PyWidgetTheme("letter-box__correct")
-incorrect_letter_theme = PyWidgetTheme("letter-box__incorrect")
 
-
-def select_letter(letter: str, position: int):
+def select_letter(position: int, letter: str):
     def select_letter_(evt, *args, **kwargs):
         new_letter_input.element.value = letter
         selected_position_input.write(position)
@@ -31,27 +34,21 @@ def select_letter(letter: str, position: int):
 def load_word(letters: list):
     console.log(word_input)
     word_box.innerHTML = "" 
+    status_map = {
+        "correct": CORRECT_LETTER,
+        "incorrect": INCORRECT_LETTER,
+        "empty": EMPTY_LETTER
+    }
     for pos, letter_obj in enumerate(letters, start=1):
-        status = letter_obj["status"]
+        status = status_map[letter_obj["status"]]
         letter = letter_obj["letter"] 
 
-        letter_box = create("div", classes="word-box__letter-box")   
-        if status == "correct":
-            correct_letter_theme.theme_it(letter_box)
-        elif status == "incorrect":
-            incorrect_letter_theme.theme_it(letter_box)
+        letter_box = LetterBox(pos, letter)
+        letter_box.build(status)
 
-        position_label = create("div", id_=f"letter-position-{pos}", classes="letter-box__position")
-        position_label.element.innerHTML = pos
-        letter_box.element.appendChild(position_label.element)
-
-        letter_label = create("div", classes="letter-box__letter")
-        letter_label.element.innerHTML = "?" if status == "empty" else letter
-        letter_box.element.appendChild(letter_label.element)
-
-        if status != "correct":
-            letter_box.element.onclick = select_letter(letter, pos)
-        word_box.appendChild(letter_box.element)
+        if status != CORRECT_LETTER:
+            letter_box.onclick = select_letter(pos, letter)
+        word_box.appendChild(letter_box.py_element.element)
 
 
 def check_letter(letter: str, position: int) -> None:
