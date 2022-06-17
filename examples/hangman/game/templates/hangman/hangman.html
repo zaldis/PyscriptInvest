@@ -3,9 +3,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-          <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+          <link rel="stylesheet" href="{% static 'libs/pyscript/pyscript.css' %}" />
           <link rel="stylesheet" href="{% static 'styles/hangman.css' %}" />
-          <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+          <script defer src="{% static 'libs/pyscript/pyscript.js' %}"></script>
+          <py-env>
+              - numpy
+          </py-env>
+          <py-config>
+              - autoclose_loader: true
+              - runtimes:
+                -
+                  src: "{% static 'libs/pyodide/pyodide.js' %}"
+                  name: pyodide-0.20
+                  lang: python
+          </py-config>
     </head>
 
     <body>
